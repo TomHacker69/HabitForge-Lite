@@ -1,0 +1,190 @@
+.overviewGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 24px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius);
+  padding: 4px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.tabs::-webkit-scrollbar { display: none; }
+
+.tab {
+  padding: 8px 18px;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition);
+  white-space: nowrap;
+  font-family: inherit;
+}
+
+.tab:hover {
+  color: var(--text-secondary);
+  background: var(--bg-hover);
+}
+
+.tab.activeTab {
+  background: var(--pink-muted);
+  color: var(--pink);
+  border: 1px solid var(--pink-muted);
+}
+
+/* Charts */
+.chartsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.chartCard {
+  overflow: hidden;
+}
+
+.chartCardWide {
+  grid-column: 1 / -1;
+}
+
+.chartTitle {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+}
+
+/* Category Breakdown */
+.catBreakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.catRow {
+  padding: 16px 20px;
+}
+
+.catRowHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.catDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.catRowName {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  flex: 1;
+}
+
+.catRowTime {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+
+.catBar {
+  height: 6px;
+  background: var(--bg-hover);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.catBarFill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Heatmap */
+.heatmapCard {
+  overflow: hidden;
+}
+
+.heatmapWrap {
+  overflow-x: auto;
+  padding-bottom: 8px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+.heatmapGrid {
+  display: flex;
+  gap: 3px;
+  min-width: max-content;
+}
+
+.heatmapWeek {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.heatmapCell {
+  width: 13px;
+  height: 13px;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: transform var(--transition), opacity var(--transition);
+}
+
+.heatmapCell:hover {
+  transform: scale(1.4);
+  opacity: 0.9;
+}
+
+.heatmapLegend {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 16px;
+  justify-content: flex-end;
+}
+
+.legendLabel {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.legendCell {
+  width: 13px;
+  height: 13px;
+  border-radius: 2px;
+}
+
+/* ─── Responsive ─────────────────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .overviewGrid { grid-template-columns: repeat(2, 1fr); }
+  .chartsGrid { grid-template-columns: 1fr; }
+  .chartCardWide { grid-column: auto; }
+}
+
+@media (max-width: 640px) {
+  .overviewGrid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .tabs { gap: 2px; }
+  .tab { padding: 7px 12px; font-size: 12px; }
+  .heatmapCell { width: 10px; height: 10px; }
+}

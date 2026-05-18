@@ -1,0 +1,215 @@
+.dateNav {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+  padding: 16px 20px;
+  overflow: hidden;
+}
+
+.miniCalendar {
+  display: flex;
+  gap: 4px;
+  flex: 1;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.miniCalendar::-webkit-scrollbar { display: none; }
+
+.dayBtn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 8px 10px;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all var(--transition);
+  min-width: 44px;
+  color: var(--text-muted);
+}
+
+.dayBtn:hover {
+  background: var(--bg-hover);
+  color: var(--text-secondary);
+}
+
+.dayBtn.today {
+  color: var(--text-secondary);
+  border-color: var(--border);
+}
+
+.dayBtn.activeDay {
+  background: var(--pink-muted);
+  border-color: var(--pink-muted);
+  color: var(--pink);
+}
+
+.dayNum {
+  font-size: 14px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.dayLabel {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.selectedDate {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.summary {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.logList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.logCard {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius);
+  transition: all var(--transition);
+  animation: slideUp 0.2s ease both;
+}
+
+.logCard:hover {
+  border-color: var(--border);
+  box-shadow: var(--shadow-sm);
+}
+
+.logCard.logCompleted {
+  opacity: 0.7;
+}
+
+.logCard.logCompleted .logTask {
+  text-decoration: line-through;
+}
+
+.checkBtn {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--bg-hover);
+  border: 2px solid var(--border);
+  cursor: pointer;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition);
+  flex-shrink: 0;
+  color: var(--text-muted);
+}
+
+.checkBtn.checked {
+  background: rgba(110, 231, 183, 0.15);
+  border-color: var(--green);
+  color: var(--green);
+}
+
+.checkBtn:hover:not(.checked) {
+  border-color: var(--pink);
+  color: var(--pink);
+}
+
+.logInfo { flex: 1; min-width: 0; }
+
+.logTask {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.logCat {
+  font-size: 11px;
+  margin-top: 2px;
+}
+
+.logNotes {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-style: italic;
+  margin-top: 4px;
+}
+
+.logRight {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.logTime {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--pink);
+  font-variant-numeric: tabular-nums;
+}
+
+.logActions {
+  display: flex;
+  gap: 4px;
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+
+.logCard:hover .logActions { opacity: 1; }
+
+.completedCheck {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding-top: 28px;
+}
+
+.completedCheck input {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--green);
+  cursor: pointer;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+  .summary { flex-direction: column; gap: 8px; }
+  .logCard { flex-wrap: wrap; }
+  .logActions {
+    opacity: 1; /* always visible on touch */
+  }
+  .dateNav { padding: 12px; gap: 8px; }
+  .selectedDate { display: none; }
+  .dayBtn { min-width: 38px; padding: 6px 8px; }
+  .dayNum { font-size: 13px; }
+}
+
+@media (max-width: 480px) {
+  .logCard { gap: 10px; }
+  .logTask { font-size: 13px; }
+  .completedCheck { padding-top: 8px; }
+}
