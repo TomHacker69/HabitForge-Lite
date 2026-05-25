@@ -1,129 +1,69 @@
-# HabitForge Lite 🚀
+# HabitForge Lite
 
-A beautiful, production-ready personal productivity dashboard built with Next.js App Router, using a **private GitHub repository as the database**.
+HabitForge Lite is a professional productivity application designed to manage personal workflows. The system is built on Next.js and utilizes GitHub repository architecture to store application state and user records without relying on traditional databases.
 
-## ✨ Features
+## Key Capabilities
 
-- 📊 **Dashboard** — Animated stats, weekly focus chart, quick navigation
-- 📂 **Categories** — Hierarchical categories → subcategories with icons and colors
-- ✅ **Tasks** — Full CRUD with priority, duration targets, search and filter
-- ⏱️ **Focus Timer** — Circular progress timer with session saving
-- 📋 **Daily Logs** — Date-navigable logs with completion tracking
-- 📈 **Analytics** — Weekly/monthly trends, heatmap, category breakdowns (Recharts)
-- 🔐 **Auth** — Password-based login with JWT HTTP-only cookies
-- 📱 **Responsive** — Mobile-first, works on all screen sizes
+* Cloud Database Integration
+  HabitForge Lite implements GitHub as a cloud database. All personal data is saved in structured files inside a private repository. This structure removes the necessity of external hosting services for databases and ensures complete ownership of your data.
 
-## 🏗️ Tech Stack
+* Categories
+  Users can group their activities into broad categories. Each category supports customizable color coding and icon designations for clear visual separation.
 
-| Layer | Tech |
-|-------|------|
-| Framework | Next.js 15 (App Router) |
-| Language | JavaScript |
-| State | Zustand |
-| Charts | Recharts |
-| GitHub API | Octokit |
-| Auth | JWT via `jose` |
-| Styling | Plain CSS Modules |
-| Deployment | Vercel |
+* Subcategories
+  Every main category supports further organization through subcategories. This hierarchical structure enables precise grouping of tasks under specific parent domains.
 
-## 📁 Project Structure
+* Tasks
+  The task engine supports complete creation, retrieval, updates, and deletion. Tasks include parameters for priority levels, estimated durations, and text searching.
 
-```
-├── app/
-│   ├── (app)/            # Protected pages (dashboard, tasks, etc.)
-│   ├── api/              # Server-side API routes
-│   ├── login/            # Auth page
-│   └── globals.css       # Design system
-├── components/
-│   ├── AppShell/
-│   ├── Navbar/
-│   └── Sidebar/
-├── lib/
-│   ├── github.js         # Octokit GitHub wrapper
-│   ├── storage.js        # Data access layer
-│   ├── analytics.js      # Analytics calculations
-│   └── auth.js           # JWT session utilities
-└── store/
-    └── appStore.js       # Zustand global store
-```
+* Timers
+  An integrated focus timer tracks session durations. Users can initiate countdown sessions and save completed intervals directly to their history.
 
-## ⚙️ Setup
+* Analytics
+  A data visualization suite displays weekly progress and activity density. Users can view category distributions and daily completion performance.
 
-### 1. Clone & Install
+## Contribution Guidelines
 
-```bash
-git clone <your-repo>
-cd habitforgelite
-npm install
-```
+We welcome contributions from the open source community. Please follow these steps to contribute to this project:
 
-### 2. Create Private GitHub Repository
+1. Fork the repository to your own account.
+2. Select any active issue or propose enhancements.
+3. Commit your changes and submit a pull request for review.
 
-Create a **new private repository** on GitHub (e.g., `habitforge-data`). This will store all your data as JSON files.
+## Deployment and Setup
 
-### 3. GitHub Personal Access Token
+You can deploy your own instance of HabitForge Lite by following these four steps.
 
-1. Go to GitHub → Settings → Developer settings → Personal access tokens → Tokens (classic)
-2. Generate a new token with **`repo`** scope
-3. Copy the token
+### Step 1: Fork the Repository
 
-### 4. Configure Environment Variables
+Begin by forking this repository to your personal GitHub account. This creates a copy of the codebase that you can deploy and modify.
 
-```bash
-cp .env.local.example .env.local
-```
+### Step 2: Configure the GitHub API Token
 
-Edit `.env.local`:
+You must generate an access token so the application can communicate with GitHub.
+1. Navigate to Developer Settings on GitHub and create a personal access token using the classic option.
+2. Ensure you select the repository scope for this token.
+3. Configure the token expiration settings. If you choose a custom date instead of the never expire option, you must regenerate and update this token after the specified duration.
 
-```env
-JWT_SECRET=your-super-secret-jwt-key-minimum-32-chars
-APP_PASSWORD=your-custom-password
-GITHUB_TOKEN=ghp_your_token_here
-GITHUB_OWNER=your-github-username
-GITHUB_REPO=habitforge-data
-```
+### Step 3: Initialize the Database Repository
 
-### 5. Run Locally
+Create another private GitHub repository, which will act as the database. This repository serves as the cloud database where the application writes categories, subcategories, tasks, and historical session logs.
 
-```bash
-npm run dev
-```
+### Step 4: Deploy and Configure Environment Variables
 
-Open [http://localhost:3000](http://localhost:3000) and log in with your `APP_PASSWORD`.
+Connect your Vercel account with GitHub and deploy the frontend. Go to the environment variables section in Vercel. You can check the env.local.example file and copy the variable names from it. Put your own password, API token, GitHub owner identity, and database repository name:
 
-## 🚀 Deploy to Vercel
+* GITHUB_TOKEN
+  The personal access token generated in the second step.
 
-1. Push your code to GitHub
-2. Import the project on [vercel.com](https://vercel.com)
-3. Add all environment variables from `.env.local` in Vercel's dashboard
-4. Deploy!
+* GITHUB_OWNER
+  Your GitHub username or organization identifier.
 
-## 📊 Data Structure
+* GITHUB_REPO
+  The name of the private repository created to store database files.
 
-All data is stored as JSON in your private GitHub repo:
+* APP_PASSWORD
+  A custom password of your choice to restrict access to the application dashboard.
 
-```
-habitforge-data/
-├── data/
-│   ├── categories.json
-│   ├── subcategories.json
-│   ├── tasks.json
-│   └── logs/
-│       ├── 2026-05-18.json
-│       └── 2026-05-19.json
-```
-
-## 🔐 Security
-
-- GitHub token is **never exposed to the frontend** — all GitHub API calls go through Next.js API routes
-- Sessions are stored in **HTTP-only cookies** (not accessible via JavaScript)
-- Middleware protects all pages and API routes
-- JWT expires after 7 days
-
-## 🎨 Design
-
-- Color theme: **Graphite (#2b2b2b)** + **Pastel Pink (#febfca)**
-- Dark mode by default
-- Glassmorphism effects
-- Smooth micro-animations
-- Fully responsive (mobile → desktop)
+* JWT_SECRET
+  A secure key used for signing session tokens.
