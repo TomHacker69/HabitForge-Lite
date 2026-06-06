@@ -1,4 +1,5 @@
 'use client';
+import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { useAppStore } from '@/store/appStore';
 import styles from './Navbar.module.css';
@@ -24,13 +25,17 @@ export default function Navbar() {
   const pathname = usePathname();
   const { sidebarOpen, timer } = useAppStore();
   const pageInfo = getPageInfo(pathname);
-  const now = new Date();
+  const [dateStr, setDateStr] = useState('');
 
-  const dateStr = now.toLocaleDateString('en-US', {
-    weekday: 'long',
-    month: 'long',
-    day: 'numeric',
-  });
+  useEffect(() => {
+    setDateStr(
+      new Date().toLocaleDateString('en-US', {
+        weekday: 'long',
+        month: 'long',
+        day: 'numeric',
+      })
+    );
+  }, []);
 
   return (
     <header
