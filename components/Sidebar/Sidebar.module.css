@@ -121,10 +121,10 @@
 }
 
 .navIcon {
-  font-size: 1.1rem;
   flex-shrink: 0;
   width: 20px;
-  text-align: center;
+  height: 20px;
+  color: currentColor;
 }
 
 .navLabel {
@@ -163,6 +163,10 @@
   transition: all var(--transition);
   width: 100%;
   white-space: nowrap;
+}
+
+.logoutBtn .navIcon {
+  margin: 0;
 }
 
 .logoutBtn:hover {
